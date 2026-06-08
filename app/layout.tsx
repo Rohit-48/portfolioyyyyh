@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -9,21 +10,21 @@ const inter = Inter({
 });
 
 const roboto = Roboto({
-  weight: ["400", "500", "700"], 
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
   variable: "--font-roboto",
   display: "swap",
-})
+});
 
-
-;// My Info
+// My Info
 const siteConfig = {
   name: "Rohit",
   title: "Rohit | Web Engineer & Developer",
   description:
     "Web Engineer crafting digital art for the web. TypeScript and React are my go-to tools, backed by rigorous engineering.",
   url: "https://rohitvince.in",
-  ogImage: "/card.png",
+  profileImage: "/images/profile/profile-image.png",
+  ogImage: "/images/profile/card.png",
   XHandle: "@rohitcpp",
 };
 
@@ -53,18 +54,13 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/favicon-16x16.png",
-        sizes: "16x16",
-        type: "image/png",
-      },
-      {
-        url: "/favicon-32x32.png",
-        sizes: "32x32",
+        url: siteConfig.profileImage,
+        sizes: "any",
         type: "image/png",
       },
     ],
-    shortcut: "/favicon-32x32.png",
-    apple: "/favicon-32x32.png",
+    shortcut: siteConfig.profileImage,
+    apple: siteConfig.profileImage,
   },
   openGraph: {
     type: "website",
@@ -103,9 +99,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${roboto.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-inter">{children}</body>
+      <body className="min-h-full flex flex-col font-inter">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
