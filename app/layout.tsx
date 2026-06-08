@@ -1,26 +1,29 @@
 import type { Metadata } from "next";
-import { Inter, Roboto, Sirin_Stencil } from "next/font/google";
+import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
-  variable: "--font-inter",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 const roboto = Roboto({
-  variable: "--font-roboto",
+  weight: ["400", "500", "700"], 
   subsets: ["latin"],
-});
+  variable: "--font-roboto",
+  display: "swap",
+})
 
-// My Info
+
+;// My Info
 const siteConfig = {
   name: "Rohit",
   title: "Rohit | Web Engineer & Developer",
   description:
     "Web Engineer crafting digital art for the web. TypeScript and React are my go-to tools, backed by rigorous engineering.",
   url: "https://rohitvince.in",
-  ogImage: "../public/profile.jpeg",
+  ogImage: "/card.png",
   XHandle: "@rohitcpp",
 };
 
@@ -48,9 +51,20 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
   icons: {
-    icon: "../public/favicon-32x32.png",
-    shortcut: "../public/favicon-32x32.png",
-    apple: "../public/favicon-32x32.png",
+    icon: [
+      {
+        url: "/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: "/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+    ],
+    shortcut: "/favicon-32x32.png",
+    apple: "/favicon-32x32.png",
   },
   openGraph: {
     type: "website",
