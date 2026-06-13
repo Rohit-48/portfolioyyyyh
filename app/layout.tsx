@@ -102,7 +102,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${roboto.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-inter">
+      <body className="min-h-full flex flex-col font-inter ml-80 flex-1 p-12">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
