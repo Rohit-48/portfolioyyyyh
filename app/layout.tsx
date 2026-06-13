@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
-import { Inter, Roboto } from "next/font/google";
+import {
+  DynaPuff,
+  Fraunces,
+  Inter,
+  Lilita_One,
+  Roboto,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Navbar } from "@/components/Navbar";
+import FloatingBadges from "@/components/FloatingBadges";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,6 +22,31 @@ const roboto = Roboto({
   weight: ["400", "500", "700"],
   subsets: ["latin"],
   variable: "--font-roboto",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const dynaPuff = DynaPuff({
+  subsets: ["latin"],
+  variable: "--font-dynapuff",
+  display: "swap",
+});
+
+const lilitaOne = Lilita_One({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-lilita-one",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
   display: "swap",
 });
 
@@ -100,16 +134,18 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${roboto.variable} h-full antialiased`}
+      className={`${inter.variable} ${roboto.variable} ${fraunces.variable} ${dynaPuff.variable} ${lilitaOne.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-inter ml-80 flex-1 p-12">
+      <body className="min-h-full flex flex-col font-inter ml-80 flex-1 p-12 mx-auto">
+        <Navbar />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <FloatingBadges />
+          <div className="relative z-10">{children}</div>
         </ThemeProvider>
       </body>
     </html>
