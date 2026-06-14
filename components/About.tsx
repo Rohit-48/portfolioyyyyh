@@ -11,7 +11,7 @@ export function AboutSection() {
 
       {/* Heading */}
       <div className="flex flex-col gap-3">
-        <p className="whitespace-pre-wrap text-3xl">
+        <div className="whitespace-pre-wrap text-3xl">
           <span>{"I was built to "}</span>
           <Typewriter
             text={[
@@ -28,13 +28,14 @@ export function AboutSection() {
             deleteSpeed={40}
             cursorChar={"_"}
           />
-        </p>
+        </div>
       </div>
-      <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-       Web Engineer crafting digital art for the web. TypeScript and React are my go-to tools, backed by rigorous engineering.
+      <p className="text-sm text-muted-foreground leading-relaxed w-4xl">
+        Full-stack developer focused on web engineering, modern JavaScript
+        frameworks, and backend systems. Building clean, scalable products with
+        great DX. Web Engineer crafting digital art for the web. TypeScript and
+        React are my go-to tools, backed by rigorous engineering."
       </p>
-
-      <Separator />
     </section>
   );
 }

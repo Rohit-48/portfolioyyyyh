@@ -53,7 +53,7 @@ const spaceGrotesk = Space_Grotesk({
 // My Info
 const siteConfig = {
   name: "Rohit",
-  title: "Rohit | Web Engineer & Developer",
+  title: "Rohit | Web Engineer",
   description:
     "Web Engineer crafting digital art for the web. TypeScript and React are my go-to tools, backed by rigorous engineering.",
   url: "https://rohitvince.in",

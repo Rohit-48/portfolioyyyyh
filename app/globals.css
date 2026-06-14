@@ -131,6 +131,7 @@
   }
   html {
     @apply font-sans;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
@@ -141,4 +142,9 @@
     #6b7280 0 10px,
     transparent 10px 20px
   );
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }

@@ -1,65 +1,141 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FolderGit2, Home, Mail, Menu, PenLine, X } from "lucide-react";
-import { ModeToggle } from "./ModeToggle";
+import {
+  ChevronDown,
+  ChevronRight,
+  File,
+  FileCode,
+  FileText,
+  Folder,
+  FolderOpen,
+  Home,
+  Menu,
+  User,
+  X,
+} from "lucide-react";
+import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
+import { ScrollArea } from "./ui/scroll-area";
 
-const links = [
-  { label: "Home", href: "#hero", icon: Home },
-  { label: "Project", href: "#projects", icon: FolderGit2 },
-  { label: "Blogs", href: "#blogs", icon: PenLine },
-  { label: "Contacts", href: "#contact", icon: Mail },
+type TreeNode = {
+  name: string;
+  type: "file" | "folder";
+  href?: string;
+  children?: TreeNode[];
+  icon?: React.ElementType;
+};
+
+const fileIcons: Record<string, React.ElementType> = {
+  hero: Home,
+  about: User,
+  contact: FileText,
+};
+
+const tree: TreeNode[] = [
+  {
+    name: "portfolio",
+    type: "folder",
+    children: [
+      { name: "hero.tsx", type: "file", href: "#hero", icon: fileIcons.hero },
+      { name: "about.tsx", type: "file", href: "#about", icon: fileIcons.about },
+      { name: "projects", type: "folder", children: [] },
+      { name: "blogs", type: "folder", children: [] },
+      { name: "contact.tsx", type: "file", href: "#contact", icon: fileIcons.contact },
+    ],
+  },
 ];
 
-function NavItem({
-  label,
-  href,
-  icon: Icon,
-  isActive,
-  onClick,
+function FileIcon({ name, icon: Icon }: { name: string; icon?: React.ElementType }) {
+  if (Icon) return <Icon size={14} />;
+  if (name.endsWith(".tsx")) return <FileCode size={14} className="text-[#3178C6]" />;
+  return <File size={14} className="text-[#AEAEB2]" />;
+}
+
+function FileTreeItem({
+  node,
+  depth = 0,
+  activeFile,
+  onSelect,
 }: {
-  label: string;
-  href: string;
-  icon: React.ElementType;
-  isActive: boolean;
-  onClick: () => void;
+  node: TreeNode;
+  depth?: number;
+  activeFile: string;
+  onSelect: (href: string) => void;
 }) {
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    onClick();
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth" });
-  };
+  const [open, setOpen] = useState(true);
+
+  if (node.type === "folder") {
+    const isActive = node.children?.some((c) => c.href && activeFile === c.href);
+
+    return (
+      <div>
+        <button
+          onClick={() => setOpen(!open)}
+          className={`flex w-full items-center gap-1.5 px-3 py-1.5 text-xs font-space-grotesk transition-all duration-150 ${
+            isActive
+              ? "text-[#E8A820]"
+              : "text-[#6B6B70] hover:text-[#AEAEB2]"
+          }`}
+          style={{ paddingLeft: `${depth * 16 + 12}px` }}
+        >
+          <span className="shrink-0 text-[10px] opacity-60">
+            {open ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
+          </span>
+          <span className="shrink-0">
+            {open ? (
+              <FolderOpen size={14} className="text-[#E8A820]" />
+            ) : (
+              <Folder size={14} className="text-[#E8A820]" />
+            )}
+          </span>
+          <span className="truncate font-medium tracking-tight">{node.name}</span>
+        </button>
+        {open &&
+          node.children?.map((child) => (
+            <FileTreeItem
+              key={child.name}
+              node={child}
+              depth={depth + 1}
+              activeFile={activeFile}
+              onSelect={onSelect}
+            />
+          ))}
+      </div>
+    );
+  }
+
+  const isActive = activeFile === node.href;
+  const isTsx = node.name.endsWith(".tsx");
 
   return (
     <button
-      onClick={handleClick}
-      className="group flex w-fit items-center gap-3"
+      onClick={() => {
+        onSelect(node.href!);
+        const el = document.querySelector(node.href!);
+        el?.scrollIntoView({ behavior: "smooth" });
+      }}
+      className={`group flex w-full items-center gap-1.5 px-3 py-1.5 text-xs font-space-grotesk transition-all duration-150 ${
+        isActive
+          ? "bg-[#E8A820]/10 text-[#E8A820] border-r-2 border-[#E8A820]"
+          : "text-[#6B6B70] hover:text-[#AEAEB2] hover:bg-white/5"
+      }`}
+      style={{ paddingLeft: `${depth * 16 + 12}px` }}
     >
-      <Icon
-        size={20}
-        className={`transition-colors duration-300 ${
-          isActive
-            ? "text-black dark:text-white"
-            : "text-[#AEAEB2] group-hover:text-black dark:group-hover:text-white"
-        }`}
-      />
-      <span
-        className={`text-2xl tracking-wide transition-colors duration-300 ${
-          isActive
-            ? "text-black dark:text-white"
-            : "text-[#AEAEB2] group-hover:text-black dark:group-hover:text-white"
-        }`}
-      >
-        {label}
+      <span className="shrink-0 w-4 flex justify-center">
+        <FileIcon name={node.name} icon={node.icon} />
+      </span>
+      <span className="truncate tracking-tight">
+        {node.name.replace(".tsx", "")}
+        {isTsx && (
+          <span className="text-[10px] opacity-40 ml-0.5 font-mono">.tsx</span>
+        )}
       </span>
     </button>
   );
 }
 
 export function Navbar() {
-  const [active, setActive] = useState("home");
+  const [activeFile, setActiveFile] = useState("#hero");
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
@@ -67,15 +143,16 @@ export function Navbar() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActive(entry.target.id);
+            setActiveFile(`#${entry.target.id}`);
           }
         });
       },
-      { threshold: 0.6 }
+      { threshold: 0.6 },
     );
 
-    links.forEach(({ href }) => {
-      const el = document.querySelector(href);
+    const ids = ["hero", "about", "projects", "blogs", "contact"];
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
 
@@ -83,30 +160,37 @@ export function Navbar() {
   }, []);
 
   const sidebar = (
-    <div className="flex h-full flex-col justify-center pl-12">
-      <ul className="flex flex-col gap-8">
-        {links.map((link) => (
-          <li key={link.label}>
-            <NavItem
-              {...link}
-              isActive={active === link.label}
-              onClick={() => {
-                setActive(link.label);
-                setMobileOpen(false);
-              }}
-            />
-          </li>
-        ))}
-      </ul>
-      <div className="absolute bottom-8 left-12">
-        <ModeToggle />
+    <div className="flex h-full flex-col">
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-border/60 px-4 py-3">
+        <span className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground/60 uppercase">
+          Explorer
+        </span>
+        <AnimatedThemeToggler
+          variant="circle"
+          duration={500}
+          className="flex size-7 items-center justify-center rounded-md border border-border/40 text-muted-foreground hover:text-foreground hover:border-border transition-all duration-200"
+        />
       </div>
+
+      {/* File tree */}
+      <ScrollArea className="flex-1">
+        <div className="py-2">
+          {tree.map((node) => (
+            <FileTreeItem
+              key={node.name}
+              node={node}
+              activeFile={activeFile}
+              onSelect={setActiveFile}
+            />
+          ))}
+        </div>
+      </ScrollArea>
     </div>
   );
 
   return (
     <>
-      {/* Mobile toggle */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
         className="fixed left-4 top-4 z-50 block rounded-md p-2 text-black dark:text-white md:hidden"
@@ -115,7 +199,6 @@ export function Navbar() {
         {mobileOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
-      {/* Mobile overlay */}
       {mobileOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/50 md:hidden"
@@ -123,9 +206,8 @@ export function Navbar() {
         />
       )}
 
-      {/* Sidebar */}
       <nav
-        className={`fixed left-0 top-0 z-50 h-screen w-56 border-r-2 border-dashed border-neutral-300 bg-white transition-transform duration-300 dark:border-neutral-800 dark:bg-[#09090b] ${
+        className={`fixed left-0 top-0 z-50 h-screen w-56 border-r border-border/60 bg-white transition-transform duration-300 dark:bg-[#09090b] ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
