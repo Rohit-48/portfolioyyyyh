@@ -136,15 +136,9 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${roboto.variable} ${fraunces.variable} ${dynaPuff.variable} ${lilitaOne.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-inter ml-80 flex-1 p-12 mx-auto">
-        <Navbar />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <FloatingBadges />
+      <body className="min-h-full flex flex-col font-inter ml-56 flex-1 p-12 mx-auto">
+        <ThemeProvider defaultTheme="system" enableSystem>
+          <Navbar />
           <div className="relative z-10">{children}</div>
         </ThemeProvider>
       </body>

@@ -4,8 +4,8 @@ export function HeroCard() {
   return (
     <div className="flex items-start gap-8 selection:bg-teal-400">
       {/*Image Section*/}
-      <div className="relative shrink-0 flex items-center gap-8 mx-auto 3rounded-2xl bg-white dark:bg-[#111111] hover:scale-110 rotate-3 p-4 transition-transform duration-500 shadow-[0_2px_10px_rgba(0,0,0,0.07)]">
-        <div className="h-40 w-40 overflow-hidden rounded-2xl ">
+      <div className="relative shrink-0 flex items-center gap-8 mx-auto rounded-2xl bg-white dark:bg-[#111111] hover:scale-110 rotate-3 p-4 transition-transform duration-500 shadow-[0_2px_10px_rgba(0,0,0,0.07)]">
+        <div className="h-40 w-40 overflow-hidden rounded-2xl">
           <img
             src="/images/profile/profile-image.png"
             alt="Rohit"
@@ -16,7 +16,7 @@ export function HeroCard() {
       </div>
 
       {/* Content*/}
-      <div className="font-bold font-inter text-6xl mx-auto w-full">
+      <div className="font-bold font-inter text-6xl w-full">
         <VerticalCutReveal
           splitBy="characters"
           staggerDuration={0.025}
@@ -27,7 +27,7 @@ export function HeroCard() {
             damping: 21,
           }}
         >
-          {`HI 👋, FRIEND!`}
+          {`Rohit Here`}
         </VerticalCutReveal>
         <VerticalCutReveal
           splitBy="characters"
@@ -41,7 +41,7 @@ export function HeroCard() {
             delay: 0.5,
           }}
         >
-          {`ROHIT HERE`}
+          {`Full Stack Engineer`}
         </VerticalCutReveal>
         <VerticalCutReveal
           splitBy="characters"
@@ -54,7 +54,7 @@ export function HeroCard() {
             delay: 1.1,
           }}
         >
-          {`NICE TO MEET 😊 YOU.`}
+          {`Building full-stack products.`}
         </VerticalCutReveal>
       </div>
     </div>
