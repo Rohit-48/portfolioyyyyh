@@ -1,30 +1,33 @@
 import VerticalCutReveal from "./fancy/text/vertical-cut-reveal";
+import TiltedCard from "./fancy/TiltedCard";
 
 export function HeroCard() {
   return (
-    <div className="flex items-start gap-10">
-      {/* Polaroid image */}
-      <div className="relative shrink-0 rotate-3 rounded-2xl bg-white dark:bg-[#c6c6c6] p-4 shadow-[0_4px_10px_rgba(0,0,0,0.2)] transition-transform duration-400 hover:scale-105 hover:rotate-0">
-        <div className="relative h-52 w-52 overflow-hidden rounded-xl">
-          <img
-            src="/images/profile/profile-image.png"
-            alt="Rohit"
-            className="h-full w-full object-cover"
-          />
-          <span className="absolute bottom-2.5 right-3 rounded-[4px] bg-white p-1.5 font-dynapuff text-sm text-black drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-            Rohit
-          </span>
-        </div>
-        {/* subtle ring overlay */}
-        <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-black/10 dark:ring-white/10" />
+    <div className="flex items-center gap-12">
+      {/* Tilted profile card */}
+      <div className="shrink-0" style={{ width: 220, height: 220 }}>
+        <TiltedCard
+          imageSrc="/images/profile/profile-image.png"
+          altText="Rohit"
+          captionText="Rohit"
+          containerHeight="220px"
+          containerWidth="220px"
+          imageHeight="220px"
+          imageWidth="220px"
+          rotateAmplitude={12}
+          scaleOnHover={1.08}
+          showMobileWarning={false}
+          showTooltip={true}
+        />
       </div>
 
       {/* Text */}
-      <div className="flex min-h-52 w-full flex-col justify-between font-inter text-6xl font-bold">
+      <div className="flex flex-col gap-3 font-inter font-bold">
         <VerticalCutReveal
           splitBy="characters"
           staggerDuration={0.025}
           staggerFrom="first"
+          containerClassName="text-5xl leading-tight"
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
         >
           {`Rohit Here`}
@@ -35,6 +38,7 @@ export function HeroCard() {
           staggerDuration={0.025}
           staggerFrom="last"
           reverse={true}
+          containerClassName="text-3xl leading-snug text-muted-foreground font-semibold"
           transition={{
             type: "spring",
             stiffness: 400,
@@ -49,6 +53,7 @@ export function HeroCard() {
           splitBy="characters"
           staggerDuration={0.025}
           staggerFrom="center"
+          containerClassName="text-lg leading-relaxed text-muted-foreground/70 font-medium"
           transition={{
             type: "spring",
             stiffness: 400,

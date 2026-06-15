@@ -136,7 +136,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${roboto.variable} ${fraunces.variable} ${dynaPuff.variable} ${lilitaOne.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-inter ml-56 flex-1 p-12 mx-auto">
+      <body className="min-h-full flex flex-col font-inter ml-52 flex-1 p-12 mx-auto">
         <ThemeProvider defaultTheme="system" enableSystem>
           <Navbar />
           <div className="relative z-10">{children}</div>
