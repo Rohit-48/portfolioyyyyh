@@ -136,10 +136,15 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${roboto.variable} ${fraunces.variable} ${dynaPuff.variable} ${lilitaOne.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-inter ml-52 flex-1 p-12 mx-auto">
+      <body className="min-h-screen font-inter bg-background">
         <ThemeProvider defaultTheme="system" enableSystem>
-          <Navbar />
-          <div className="relative z-10">{children}</div>
+          {/* Notion-style: one centred column, sidebar hugs its left edge */}
+          <div className="mx-auto w-full max-w-4xl min-h-screen relative">
+            <Navbar />
+            <main className="ml-52 py-16 pr-8 pl-12 relative z-10">
+              {children}
+            </main>
+          </div>
         </ThemeProvider>
       </body>
     </html>

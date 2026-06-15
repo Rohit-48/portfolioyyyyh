@@ -185,13 +185,13 @@ export function Navbar() {
         />
       )}
 
-      {/* Sidebar */}
+      {/* Sidebar — absolute within the max-w container so it centres with the page */}
       <aside
-        className={`fixed left-0 top-0 z-50 h-screen w-52 border-r border-border/60 bg-background transition-transform duration-300 md:translate-x-0 ${
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        className={`absolute top-0 left-0 z-50 h-full w-52 border-r border-border/60 bg-background transition-transform duration-300 max-md:fixed ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
-        {sidebar}
+        <div className="sticky top-0 h-screen overflow-y-auto">{sidebar}</div>
       </aside>
     </>
   );
