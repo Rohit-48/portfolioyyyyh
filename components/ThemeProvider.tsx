@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
@@ -13,10 +14,14 @@ type ResolvedTheme = "light" | "dark";
 
 const ThemeContext = createContext<{
   theme: Theme;
+  resolvedTheme: ResolvedTheme;
   setTheme: (theme: Theme) => void;
+  toggleTheme: () => void;
 }>({
   theme: "system",
+  resolvedTheme: "light",
   setTheme: () => {},
+  toggleTheme: () => {},
 });
 
 export function useTheme() {
@@ -35,6 +40,7 @@ export function ThemeProvider({
   enableSystem?: boolean;
 }) {
   const [theme, setThemeState] = useState<Theme>(defaultTheme);
+  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>("light");
   const [mounted, setMounted] = useState(false);
 
   const apply = useCallback((t: ResolvedTheme) => {
@@ -51,30 +57,48 @@ export function ThemeProvider({
   }, []);
 
   const resolve = useCallback(
-    (t: Theme): ResolvedTheme =>
-      t === "system" && enableSystem ? getSystem() : (t as ResolvedTheme),
+    (t: Theme): ResolvedTheme => {
+      if (t === "system") {
+        return enableSystem ? getSystem() : "light";
+      }
+
+      return t;
+    },
     [enableSystem, getSystem]
   );
 
   const setTheme = useCallback(
     (t: Theme) => {
+      const nextResolvedTheme = resolve(t);
+
       setThemeState(t);
+      setResolvedTheme(nextResolvedTheme);
       try {
         localStorage.setItem(storageKey, t);
       } catch {}
-      apply(resolve(t));
+      apply(nextResolvedTheme);
     },
     [storageKey, resolve, apply]
   );
 
+  const toggleTheme = useCallback(() => {
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  }, [resolvedTheme, setTheme]);
+
   useEffect(() => {
     let stored: Theme | null = null;
     try {
-      stored = localStorage.getItem(storageKey) as Theme | null;
+      const value = localStorage.getItem(storageKey);
+      if (value === "light" || value === "dark" || value === "system") {
+        stored = value;
+      }
     } catch {}
     const initial = stored || defaultTheme;
+    const nextResolvedTheme = resolve(initial);
+
     setThemeState(initial);
-    apply(resolve(initial));
+    setResolvedTheme(nextResolvedTheme);
+    apply(nextResolvedTheme);
     setMounted(true);
   }, [storageKey, defaultTheme, resolve, apply]);
 
@@ -82,17 +106,27 @@ export function ThemeProvider({
     if (!enableSystem) return;
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const handler = () => {
-      if (theme === "system") apply(getSystem());
+      if (theme === "system") {
+        const nextResolvedTheme = getSystem();
+        setResolvedTheme(nextResolvedTheme);
+        apply(nextResolvedTheme);
+      }
     };
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, [theme, enableSystem, getSystem, apply]);
 
+  const value = useMemo(
+    () => ({
+      theme: mounted ? theme : defaultTheme,
+      resolvedTheme,
+      setTheme,
+      toggleTheme,
+    }),
+    [defaultTheme, mounted, resolvedTheme, setTheme, theme, toggleTheme]
+  );
+
   return (
-    <ThemeContext.Provider
-      value={{ theme: mounted ? theme : defaultTheme, setTheme }}
-    >
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 }

@@ -1,5 +1,6 @@
 import { AboutSection } from "@/components/About";
 import { HeroCard } from "@/components/HeroCard";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       <section id="hero">
         <HeroCard />
       </section>
+      <Separator />
       <section id="about">
         <AboutSection />
       </section>

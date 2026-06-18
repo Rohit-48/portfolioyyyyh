@@ -10,7 +10,7 @@ import {
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
-import FloatingBadges from "@/components/FloatingBadges";
+import { siteConfig } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,18 +49,6 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   display: "swap",
 });
-
-// My Info
-const siteConfig = {
-  name: "Rohit",
-  title: "Rohit | Web Engineer",
-  description:
-    "Web Engineer crafting digital art for the web. TypeScript and React are my go-to tools, backed by rigorous engineering.",
-  url: "https://rohitvince.in",
-  profileImage: "/images/profile/profile-image.png",
-  ogImage: "/images/profile/card.png",
-  XHandle: "@rohitcpp",
-};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -116,7 +104,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    creator: siteConfig.XHandle,
+    creator: siteConfig.xHandle,
     images: [siteConfig.ogImage],
   },
   robots: {
@@ -136,12 +124,11 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${roboto.variable} ${fraunces.variable} ${dynaPuff.variable} ${lilitaOne.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-screen font-inter bg-background">
+      <body className="min-h-screen bg-background font-inter">
         <ThemeProvider defaultTheme="system" enableSystem>
-          {/* Notion-style: one centred column, sidebar hugs its left edge */}
-          <div className="mx-auto w-full max-w-4xl min-h-screen relative">
+          <div className="relative mx-auto min-h-screen w-full max-w-4xl">
             <Navbar />
-            <main className="ml-52 py-16 pr-8 pl-12 relative z-10">
+            <main className="relative z-10 ml-52 px-6 py-16 sm:px-8 md:pl-12">
               {children}
             </main>
           </div>

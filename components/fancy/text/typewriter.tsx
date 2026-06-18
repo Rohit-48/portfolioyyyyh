@@ -1,7 +1,14 @@
 "use client";
 
-import { ElementType, useEffect, useState } from "react";
-import { motion, Variants } from "motion/react";
+import {
+  type ElementType,
+  type HTMLAttributes,
+  type ReactNode,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import { motion, type Variants } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -9,7 +16,7 @@ interface TypewriterProps {
   /**
    * Text or array of texts to type out
    */
-  text: string | string[];
+  text: string | readonly string[];
 
   /**
    * HTML Tag to render the component as
@@ -68,7 +75,7 @@ interface TypewriterProps {
    * Character or React node to use as cursor
    * @default "|"
    */
-  cursorChar?: string | React.ReactNode;
+  cursorChar?: string | ReactNode;
 
   /**
    * Animation variants for cursor
@@ -110,13 +117,16 @@ const Typewriter = ({
     },
   },
   ...props
-}: TypewriterProps & React.HTMLAttributes<HTMLElement>) => {
+}: TypewriterProps & HTMLAttributes<HTMLElement>) => {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
-  const texts = Array.isArray(text) ? text : [text];
+  const texts = useMemo(
+    () => (Array.isArray(text) ? [...text] : [text]),
+    [text]
+  );
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -130,9 +140,10 @@ const Typewriter = ({
           if (currentTextIndex === texts.length - 1 && !loop) {
             return;
           }
-          setCurrentTextIndex((prev) => (prev + 1) % texts.length);
-          setCurrentIndex(0);
-          timeout = setTimeout(() => {}, waitTime);
+          timeout = setTimeout(() => {
+            setCurrentTextIndex((prev) => (prev + 1) % texts.length);
+            setCurrentIndex(0);
+          }, waitTime);
         } else {
           timeout = setTimeout(() => {
             setDisplayText((prev) => prev.slice(0, -1));
@@ -170,6 +181,7 @@ const Typewriter = ({
     texts,
     currentTextIndex,
     loop,
+    initialDelay,
   ]);
 
   return (
