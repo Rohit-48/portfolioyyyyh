@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock, Calendar } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, BookOpen } from "lucide-react";
 import fs from "fs";
 import path from "path";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import remarkGfm from "remark-gfm";
 
+import { MarkdownContent } from "@/components/MarkdownContent";
+import { ReadingProgress } from "@/components/ReadingProgress";
 import { getBlogPost, getBlogPosts } from "@/data/blogs";
+import { siteConfig } from "@/lib/site";
 
 export function generateStaticParams() {
   return getBlogPosts().map((post) => ({ slug: post.slug }));
@@ -38,60 +39,86 @@ export default async function BlogPostPage({
   const post = getBlogPost(slug);
   if (!post) notFound();
 
-  const filePath = path.join(process.cwd(), "content", "blogs", `${slug}.md`);
+  const filePath = path.join(process.cwd(), "content", "blogs", `${slug}.mdx`);
+  if (!fs.existsSync(filePath)) notFound();
+
   const source = fs.readFileSync(filePath, "utf8");
 
   return (
-    <div className="max-w-2xl">
+    <div className="mx-auto w-full max-w-[68ch]">
+      <ReadingProgress />
+
       <Link
         href="/blogs"
-        className="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
+        className="group inline-flex items-center gap-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
       >
-        <ArrowLeft size={14} />
+        <ArrowLeft
+          size={14}
+          className="transition-transform group-hover:-translate-x-0.5"
+        />
         Back to blogs
       </Link>
 
-      <div className="mt-4 flex items-center gap-3 text-[11px] text-muted-foreground">
+      <header className="mt-10 border-b border-border pb-9">
         <span
-          className="rounded-md border px-2 py-0.5 text-[10px] font-medium"
+          className="inline-flex rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]"
           style={{ borderColor: post.accent, color: post.accent }}
         >
           {post.category}
         </span>
-        <span className="flex items-center gap-1">
-          <Calendar size={12} />
-          {post.date}
-        </span>
-        <span className="flex items-center gap-1">
-          <Clock size={12} />
-          {post.readTime}
-        </span>
-      </div>
 
-      <h1 className="mt-3 font-fraunces text-3xl font-semibold leading-tight tracking-tight">
-        {post.title}
-      </h1>
+        <h1 className="mt-5 text-balance font-fraunces text-4xl font-semibold leading-[1.12] tracking-tight sm:text-5xl">
+          {post.title}
+        </h1>
 
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-        {post.excerpt}
-      </p>
+        <p className="mt-5 text-pretty text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
+          {post.excerpt}
+        </p>
 
-      <div className="mt-6 flex flex-wrap gap-1.5">
-        {post.tags.map((tag) => (
-          <span
-            key={tag}
-            className="rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground"
-          >
-            {tag}
+        <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+          <span className="font-medium text-foreground">{siteConfig.name}</span>
+          <span className="flex items-center gap-1.5">
+            <Calendar size={13} />
+            {post.date}
           </span>
-        ))}
+          <span className="flex items-center gap-1.5">
+            <Clock size={13} />
+            {post.readTime} read
+          </span>
+          <span className="flex items-center gap-1.5">
+            <BookOpen size={13} />
+            Article
+          </span>
+        </div>
+
+        <div className="mt-5 flex flex-wrap gap-2">
+          {post.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-md bg-muted/70 px-2 py-1 text-[10px] text-muted-foreground"
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </header>
+
+      <div className="pt-9">
+        <MarkdownContent source={source} />
       </div>
 
-      <hr className="my-8 border-dashed border-border" />
-
-      <article className="prose prose-sm dark:prose-invert max-w-none">
-        <MDXRemote source={source} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
-      </article>
+      <footer className="mt-14 border-t border-border pt-7">
+        <Link
+          href="/blogs"
+          className="group inline-flex items-center gap-2 text-sm font-medium text-foreground"
+        >
+          <ArrowLeft
+            size={15}
+            className="transition-transform group-hover:-translate-x-0.5"
+          />
+          Read more articles
+        </Link>
+      </footer>
     </div>
   );
 }

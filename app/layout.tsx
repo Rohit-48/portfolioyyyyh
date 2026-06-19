@@ -128,7 +128,7 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="system" enableSystem>
           <div className="relative mx-auto min-h-screen w-full max-w-4xl">
             <Navbar />
-            <main className="relative z-10 ml-52 px-6 py-16 sm:px-8 md:pl-12">
+            <main className="relative z-10 px-5 py-16 sm:px-8 md:ml-52 md:pl-12">
               {children}
             </main>
           </div>

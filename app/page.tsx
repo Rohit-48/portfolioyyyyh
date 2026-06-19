@@ -1,5 +1,10 @@
 import { AboutSection } from "@/components/About";
 import { HeroCard } from "@/components/HeroCard";
+import {
+  BlogsPreview,
+  ContactSection,
+  ProjectsPreview,
+} from "@/components/HomePreviewSections";
 import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
@@ -9,9 +14,13 @@ export default function Home() {
         <HeroCard />
       </section>
       <Separator />
-      <section id="about">
-        <AboutSection />
-      </section>
+      <AboutSection />
+      <Separator />
+      <ProjectsPreview />
+      <Separator />
+      <BlogsPreview />
+      <Separator />
+      <ContactSection />
     </div>
   );
 }

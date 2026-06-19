@@ -23,8 +23,8 @@ import { profileImages, siteConfig } from "@/lib/site";
 const NAV_LINKS = [
   { href: "#hero", label: "Home", icon: Home },
   { href: "#about", label: "About", icon: User },
-  { href: "/projects", label: "Projects", icon: Briefcase },
-  { href: "/blogs", label: "Blogs", icon: BookOpen },
+  { href: "#projects", label: "Projects", icon: Briefcase },
+  { href: "#blogs", label: "Blogs", icon: BookOpen },
   { href: "#contact", label: "Contact", icon: Mail },
   { href: "/gallery", label: "Gallery", icon: Images },
 ] as const;
@@ -194,7 +194,7 @@ export function Navbar() {
           duration={500}
           theme={resolvedTheme}
           onThemeChange={setTheme}
-          className="flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
+          className="flex size-7 hover:cursor-pointer hover:scale-105 transition-all duration-300 items-center justify-center rounded-md text-muted-foreground  hover:text-foreground"
         />
       </div>
     </div>
