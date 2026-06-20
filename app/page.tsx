@@ -1,8 +1,8 @@
 import { AboutSection } from "@/components/About";
+import { ContactSection } from "@/components/ContactSection";
 import { HeroCard } from "@/components/HeroCard";
 import {
   BlogsPreview,
-  ContactSection,
   ProjectsPreview,
 } from "@/components/HomePreviewSections";
 import { Separator } from "@/components/ui/separator";

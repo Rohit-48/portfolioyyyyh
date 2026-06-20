@@ -23,8 +23,8 @@ import { profileImages, siteConfig } from "@/lib/site";
 const NAV_LINKS = [
   { href: "#hero", label: "Home", icon: Home },
   { href: "#about", label: "About", icon: User },
-  { href: "#projects", label: "Projects", icon: Briefcase },
-  { href: "#blogs", label: "Blogs", icon: BookOpen },
+  { href: "/projects", label: "Projects", icon: Briefcase },
+  { href: "/blogs", label: "Blogs", icon: BookOpen },
   { href: "#contact", label: "Contact", icon: Mail },
   { href: "/gallery", label: "Gallery", icon: Images },
 ] as const;
@@ -185,7 +185,6 @@ export function Navbar() {
               target="_blank"
               rel="noreferrer"
             >
-              {social.label}
             </Link>
           ))}
         </div>
