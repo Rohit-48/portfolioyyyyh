@@ -8,40 +8,43 @@ import {
   SiCodeberg,
   SiGithub,
   SiKaggle,
+  SiLeetcode,
   SiMastodon,
+  SiPinterest,
   SiX,
 } from "react-icons/si";
 
 import { InteractiveAddress } from "@/components/InteractiveAddress";
+import { label } from "motion/react-client";
 
 const email = "rohit@rohitxyz.me";
 const contactLinks = [
   {
     label: "GitHub",
-    handle: "@rohitvince",
+    handle: "@Rohit-48",
     note: "Open source and projects",
-    href: "https://github.com/rohitvince",
+    href: "https://github.com/Rohit-48",
     icon: SiGithub,
   },
   {
     label: "Codeberg",
     handle: "@Spaceeeeeh",
-    note: "Code and Neovim config",
+    note: "Open source and projects",
     href: "https://codeberg.org/Spaceeeeeh",
     icon: SiCodeberg,
   },
   {
     label: "X",
     handle: "@rohitcpp",
-    note: "Notes shared in public",
+    note: "perspective shared in public",
     href: "https://twitter.com/rohitcpp",
     icon: SiX,
   },
   {
     label: "LinkedIn",
-    handle: "Rohit Vince",
-    note: "Work and experience",
-    href: "https://www.linkedin.com/in/rohitvince/",
+    handle: "Rohit Mandavkar",
+    note: "Work and experience shared in public",
+    href: "https://www.linkedin.com/in/rohit48/",
     icon: FaLinkedinIn,
   },
   {
@@ -53,39 +56,53 @@ const contactLinks = [
   },
   {
     label: "Cal.com",
-    handle: "/rohitvince",
+    handle: "/rohitvince0",
     note: "Book a conversation",
-    href: "https://cal.com/rohitvince",
+    href: "https://cal.com/rohitvince0",
     icon: SiCaldotcom,
   },
   {
     label: "Buy Me a Coffee",
-    handle: "@rohitvince",
+    handle: "@rohit77",
     note: "Support what I make",
-    href: "https://buymeacoffee.com/rohitvince",
+    href: "https://buymeacoffee.com/rohit77",
     icon: SiBuymeacoffee,
   },
   {
     label: "Kaggle",
-    handle: "@rohitvince",
+    handle: "@rohitmandavkar48",
     note: "Data work and notebooks",
-    href: "https://www.kaggle.com/rohitvince",
+    href: "https://www.kaggle.com/rohitmandavkar48",
     icon: SiKaggle,
   },
   {
     label: "Behance",
-    handle: "@rohitvince",
+    handle: "@rohitmandavkar",
     note: "Design and visual work",
-    href: "https://www.behance.net/rohitvince",
+    href: "https://www.behance.net/rohitmandavkar",
     icon: SiBehance,
   },
   {
     label: "DEFCON.social",
-    handle: "@rohitcpp",
+    handle: "@rohitzeeenx",
     note: "Security community",
-    href: "https://defcon.social/@rohitcpp",
+    href: "https://defcon.social/@rohitzeeenx",
     icon: SiMastodon,
   },
+  {
+    label: "Pinterest",
+    handle: "@rohitmandavkar",
+    note: "Design and visual work",
+    href: "https://pin.it/2WcaxCjlz",
+    icon: SiPinterest,
+  },
+  {
+    label: "Leetcode",
+    handle: "@rohitmandavkar48",
+    note: "Competitive programming",
+    href: "https://leetcode.com/u/rohit-48/",
+    icon: SiLeetcode,
+  }
 ] as const;
 
 export function ContactSection() {
@@ -135,7 +152,7 @@ export function ContactSection() {
               rel={external ? "noreferrer me" : undefined}
               className={`group flex min-w-0 items-start gap-3 border-border py-4 transition-colors hover:bg-muted/25 sm:px-4 ${index < contactLinks.length - 2 ? "border-b" : ""} ${index % 2 === 0 ? "sm:border-r sm:pl-0" : "sm:pr-0"}`}
             >
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-colors group-hover:border-foreground/20 group-hover:text-foreground">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground  group-hover:border-foreground/20 group-hover:text-foreground group-hover:scale-110 transition-all duration-500 hover:cursor-pointer">
                 <Icon size={15} aria-hidden="true" />
               </span>
               <span className="min-w-0 flex-1">

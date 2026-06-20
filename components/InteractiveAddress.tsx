@@ -11,7 +11,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { AtSign, Globe, Mail, User } from "lucide-react";
 
-type Highlight = "name" | "website" | "email" | "instagram" | null;
+type Highlight = "name" | "website" | "email" | null;
 type SegmentName = "name" | "at" | "domain" | "extension";
 type IconComponent = ComponentType<{ size?: number; "aria-hidden"?: boolean }>;
 
@@ -48,14 +48,12 @@ const actions: Array<{
   { type: "name", label: "Name", icon: User },
   { type: "website", label: "Website", icon: Globe },
   { type: "email", label: "Email", icon: Mail },
-  { type: "instagram", label: "Instagram", icon: InstagramIcon },
 ];
 
 const activeSegments: Record<NonNullable<Highlight>, SegmentName[]> = {
   name: ["name"],
   website: ["domain", "extension"],
   email: ["name", "at", "domain", "extension"],
-  instagram: ["at", "domain"],
 };
 
 type BoxPosition = { x: number; width: number };

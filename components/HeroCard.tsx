@@ -95,7 +95,7 @@ export function HeroCard() {
 
           {/* GitHub */}
           <Link
-            href="https://github.com/rohitmandavkar"
+            href="https://github.com/Rohit-48"
             target="_blank"
             className="inline-flex h-8 items-center gap-1.5 rounded-lg border
                        border-border bg-background px-3 text-xs font-medium
