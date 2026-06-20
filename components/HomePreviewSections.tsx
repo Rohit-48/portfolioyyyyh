@@ -3,80 +3,81 @@ import { ArrowUpRight, CalendarDays, Clock3 } from "lucide-react";
 
 import { InteractiveAddress } from "@/components/InteractiveAddress";
 import { getBlogPosts } from "@/data/blogs";
-import { getAllProjects } from "@/data/projects";
-
-function SectionHeader({
-  eyebrow,
-  title,
-  href,
-  linkLabel,
-}: {
-  eyebrow: string;
-  title: string;
-  href: string;
-  linkLabel: string;
-}) {
-  return (
-    <div className="flex items-end justify-between gap-6">
-      <div>
-        <p className="font-space-grotesk text-[10px] uppercase tracking-[0.3em] text-muted-foreground/50">
-          {eyebrow}
-        </p>
-        <h2 className="mt-3 font-fraunces text-3xl font-semibold tracking-tight">
-          {title}
-        </h2>
-      </div>
-      <Link
-        href={href}
-        className="group mb-1 inline-flex shrink-0 items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-      >
-        {linkLabel}
-        <ArrowUpRight
-          size={13}
-          className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-        />
-      </Link>
-    </div>
-  );
-}
+import { projects } from "@/data/projects";
 
 export function ProjectsPreview() {
-  const projects = getAllProjects().slice(0, 2);
-
   return (
     <section id="projects" className="scroll-mt-12">
-      <SectionHeader
-        eyebrow="Selected work"
-        title="Projects"
-        href="/projects"
-        linkLabel="View all"
-      />
+      <p className="font-space-grotesk text-[10px] uppercase tracking-[0.3em] text-muted-foreground/50">
+        Selected work
+      </p>
+      <h2 className="mt-3 font-fraunces text-3xl font-semibold tracking-tight">
+        My Projects
+      </h2>
 
-      <div className="mt-8 border-y border-border">
-        {projects.map((project, index) => (
+      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {projects.filter((project) => project.featured).map((project) => (
           <Link
             key={project.slug}
             href={`/projects/${project.slug}`}
-            className="group grid grid-cols-[2rem_1fr_auto] gap-3 border-b border-border py-5 last:border-b-0"
+            className="group relative flex flex-col gap-3 rounded-xl border border-border
+                       bg-card p-5
+                       hover:border-foreground/20 hover:bg-muted/20 hover:scale-105 transition-all duration-300"
           >
-            <span className="pt-0.5 font-mono text-[10px] text-muted-foreground/60">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <div className="min-w-0">
-              <h3 className="font-space-grotesk text-sm font-semibold text-foreground">
-                {project.title}
-              </h3>
-              <p className="mt-1.5 text-xs leading-5 text-muted-foreground">
-                {project.description}
-              </p>
-              <p className="mt-2 text-[10px] text-muted-foreground/70">
-                {project.tech.slice(0, 4).join(" / ")}
-              </p>
+            {/* Thumbnail */}
+            {project.image && (
+              <div className="h-36 w-full overflow-hidden rounded-lg border border-border">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="h-full w-full object-cover transition-transform
+                             duration-500"
+                />
+              </div>
+            )}
+
+            {/* Title + status */}
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex flex-col gap-1.5">
+                <h3 className="font-space-grotesk text-sm font-semibold
+                               text-foreground group-hover:text-foreground">
+                  {project.title}
+                </h3>
+                <span
+                  className={`w-fit rounded px-1.5 py-0.5 text-[10px] font-medium ${
+                    project.featured
+                      ? "bg-green-500/10 text-green-600 dark:text-green-400"
+                      : "bg-muted text-muted-foreground"
+                  }`}
+                >
+                  Featured
+                </span>
+              </div>
+              <ArrowUpRight
+                size={14}
+                className="mt-0.5 shrink-0 text-muted-foreground/40 transition-all
+                           duration-200 group-hover:-translate-y-0.5
+                           group-hover:translate-x-0.5 group-hover:text-foreground"
+              />
             </div>
-            <ArrowUpRight
-              size={15}
-              className="mt-0.5 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground"
-            />
+
+            {/* Description */}
+            <p className="text-xs leading-relaxed text-muted-foreground">
+              {project.description}
+            </p>
+
+            {/* Tech */}
+            <div className="flex flex-wrap gap-1.5">
+              {project.tech.slice(0, 4).map((t) => (
+                <span
+                  key={t}
+                  className="rounded-md border border-border bg-muted px-1.5
+                             py-0.5 text-[10px] text-muted-foreground"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
           </Link>
         ))}
       </div>
@@ -89,47 +90,55 @@ export function BlogsPreview() {
 
   return (
     <section id="blogs" className="scroll-mt-12">
-      <SectionHeader
-        eyebrow="Field notes"
-        title="Recent writing"
-        href="/blogs"
-        linkLabel="View all"
-      />
+      <p className="font-space-grotesk text-[10px] uppercase tracking-[0.3em] text-muted-foreground/50">
+        Field notes
+      </p>
+      <h2 className="mt-3 font-fraunces text-3xl font-semibold tracking-tight">
+        Recent writing
+      </h2>
 
-      <div className="mt-8 space-y-3">
+      <div className="mt-8 divide-y divide-border rounded-xl border border-border overflow-hidden">
         {posts.map((post) => (
           <Link
             key={post.slug}
             href={`/blogs/${post.slug}`}
-            className="group block rounded-xl border border-border/80 p-5 transition-colors hover:border-foreground/20 hover:bg-muted/20"
+            className="group flex items-start justify-between gap-5 p-5
+                       transition-colors hover:bg-muted/30"
           >
-            <div className="flex flex-wrap items-center gap-3 text-[10px] text-muted-foreground">
-              <span className="font-medium uppercase tracking-[0.16em]">
-                {post.category}
-              </span>
-              <span className="inline-flex items-center gap-1">
-                <CalendarDays size={11} />
-                {post.date}
-              </span>
-              <span className="inline-flex items-center gap-1">
-                <Clock3 size={11} />
-                {post.readTime}
-              </span>
-            </div>
-            <div className="mt-3 flex items-start justify-between gap-5">
-              <div>
-                <h3 className="font-fraunces text-xl font-semibold leading-snug tracking-tight">
-                  {post.title}
-                </h3>
-                <p className="mt-2 line-clamp-2 text-xs leading-5 text-muted-foreground">
-                  {post.excerpt}
-                </p>
+            <div className="flex flex-col gap-2 min-w-0">
+              {/* Meta row */}
+              <div className="flex flex-wrap items-center gap-3 text-[10px] text-muted-foreground">
+                <span className="font-medium uppercase tracking-[0.16em]">
+                  {post.category}
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <CalendarDays size={10} />
+                  {post.date}
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <Clock3 size={10} />
+                  {post.readTime}
+                </span>
               </div>
-              <ArrowUpRight
-                size={15}
-                className="mt-1 shrink-0 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground"
-              />
+
+              {/* Title */}
+              <h3 className="font-fraunces text-base font-semibold leading-snug
+                             tracking-tight">
+                {post.title}
+              </h3>
+
+              {/* Excerpt */}
+              <p className="line-clamp-2 text-xs leading-5 text-muted-foreground">
+                {post.excerpt}
+              </p>
             </div>
+
+            <ArrowUpRight
+              size={14}
+              className="mt-1 shrink-0 text-muted-foreground/40 transition-all
+                         duration-200 group-hover:-translate-y-0.5
+                         group-hover:translate-x-0.5 group-hover:text-foreground"
+            />
           </Link>
         ))}
       </div>

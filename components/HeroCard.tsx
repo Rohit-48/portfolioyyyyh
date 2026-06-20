@@ -79,11 +79,15 @@ export function HeroCard() {
         <div className="mt-6 flex items-center gap-3">
           {/* Resume */}
           <Link
-            href="/resume"
+            href="/images/profile/resume.pdf"
             className="inline-flex h-8 items-center gap-1.5 rounded-lg border
                        border-border bg-foreground px-3 text-xs font-semibold
                        text-background transition-colors duration-200
-                       hover:bg-foreground/90"
+                       hover:bg-foreground/90 "
+            target="_blank"
+            rel="noreferrer"
+       
+       
           >
             <LuFileText size={12} />
             Resume
