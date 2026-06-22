@@ -19,6 +19,7 @@ import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 import { Separator } from "./ui/separator";
 import { useTheme } from "./ThemeProvider";
 import { profileImages, siteConfig } from "@/lib/site";
+import { SpotifyCard } from "./SpotifyCard";
 
 const NAV_LINKS = [
   { href: "#hero", label: "Home", icon: Home },
@@ -173,7 +174,7 @@ export function Navbar() {
 
       <div className="flex-1" />
 
-      <Separator className="mb-4 opacity-50" />
+      <Separator className="mb-4 opacity-100 h-1" />
 
       <div className="flex items-center justify-between gap-2 px-1">
         <div className="flex min-w-0 flex-wrap gap-2">
@@ -187,6 +188,11 @@ export function Navbar() {
             >
             </Link>
           ))}
+        </div>
+        <Separator className="opacity-100 h-4" />
+          {/*SPOTIFY*/}
+        <div className="flex items-center justify-center">
+          <SpotifyCard /> 
         </div>
         <AnimatedThemeToggler
           variant="circle"
