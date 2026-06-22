@@ -8,7 +8,6 @@ import TiltedCard from "./fancy/TiltedCard";
 export function HeroCard() {
   return (
     <div className="flex items-center gap-14">
-
       {/* Image */}
       <div className="shrink-0" style={{ width: 220, height: 220 }}>
         <TiltedCard
@@ -28,7 +27,6 @@ export function HeroCard() {
 
       {/* Content */}
       <div className="flex flex-col font-inter">
-
         {/* Status row */}
         <div className="mb-5 flex items-center gap-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-1.5">
@@ -59,7 +57,12 @@ export function HeroCard() {
           staggerFrom="last"
           reverse={true}
           containerClassName="mt-2 text-2xl font-semibold leading-snug text-muted-foreground"
-          transition={{ type: "spring", stiffness: 400, damping: 21, delay: 0.8 }}
+          transition={{
+            type: "spring",
+            stiffness: 400,
+            damping: 21,
+            delay: 0.8,
+          }}
         >
           {`Full Stack Engineer`}
         </VerticalCutReveal>
@@ -70,7 +73,12 @@ export function HeroCard() {
           staggerDuration={0.018}
           staggerFrom="center"
           containerClassName="mt-3 text-sm font-normal leading-relaxed text-muted-foreground/70 max-w-sm"
-          transition={{ type: "spring", stiffness: 400, damping: 21, delay: 1.1 }}
+          transition={{
+            type: "spring",
+            stiffness: 400,
+            damping: 21,
+            delay: 1.1,
+          }}
         >
           {`Next.js · Hono · Rust · Infra.`}
         </VerticalCutReveal>
@@ -86,8 +94,6 @@ export function HeroCard() {
                        hover:bg-foreground/90 "
             target="_blank"
             rel="noreferrer"
-       
-       
           >
             <LuFileText size={12} />
             Resume
@@ -121,7 +127,6 @@ export function HeroCard() {
             <LuArrowUpRight size={10} />
           </Link>
         </div>
-
       </div>
     </div>
   );

@@ -102,7 +102,7 @@ const contactLinks = [
     note: "Competitive programming",
     href: "https://leetcode.com/u/rohit-48/",
     icon: SiLeetcode,
-  }
+  },
 ] as const;
 
 export function ContactSection() {

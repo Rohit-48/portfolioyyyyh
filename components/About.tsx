@@ -15,19 +15,26 @@ export function AboutSection() {
       <div className="mt-10 space-y-5 text-sm leading-7 text-muted-foreground">
         <p>
           I&apos;m a{" "}
-          <strong className="font-semibold text-foreground">full-stack engineer</strong>{" "}
-          working across product interfaces, backend systems, and the tooling between them.
-          My usual stack is React and TypeScript in the browser, with Rust or Node.js behind it.
+          <strong className="font-semibold text-foreground">
+            full-stack engineer
+          </strong>{" "}
+          working across product interfaces, backend systems, and the tooling
+          between them. My usual stack is React and TypeScript in the browser,
+          with Rust or Node.js behind it.
         </p>
         <p>
           I care about{" "}
-          <strong className="font-semibold text-foreground">useful abstractions</strong>,
-          thoughtful details, and systems that remain understandable after the first version ships.
+          <strong className="font-semibold text-foreground">
+            useful abstractions
+          </strong>
+          , thoughtful details, and systems that remain understandable after the
+          first version ships.
         </p>
         <p>
           Away from product work, I{" "}
           <strong className="font-semibold text-foreground">play CTFs</strong>,
-          explore systems programming, tune my editor, and write about things I learn along the way.
+          explore systems programming, tune my editor, and write about things I
+          learn along the way.
         </p>
       </div>
 

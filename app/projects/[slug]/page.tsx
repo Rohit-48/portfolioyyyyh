@@ -54,7 +54,7 @@ export default async function ProjectPage({
       </h1>
 
       <p className="mt-2 text-sm text-muted-foreground">
-        {project.longDescription}
+        {project.description}
       </p>
 
       {(project.liveUrl || project.repoUrl) && (
@@ -94,9 +94,7 @@ export default async function ProjectPage({
       <Separator className="mt-12 border-dashed" />
 
       <div className="mt-8">
-        <p className="text-sm text-muted-foreground">
-          {project.longDescription}
-        </p>
+        <p className="text-sm text-muted-foreground">{project.description}</p>
       </div>
     </div>
   );

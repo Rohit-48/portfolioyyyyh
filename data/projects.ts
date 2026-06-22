@@ -19,14 +19,15 @@ export const projects: Project[] = [
   {
     slug: "hubeee",
     title: "DEVHUB",
-    description: "A terminal-based workspace manager that scans your project root, tracks git state, scores project health, and gives you a keyboard-driven dashboard for active work.",
+    description:
+      "A terminal-based workspace manager that scans your project root, tracks git state, scores project health, and gives you a keyboard-driven dashboard for active work.",
     tags: ["RUST", "RATATUI", "CLI", "GIT2", "SERDE"],
     tech: ["Rust", "Ratatui", "Crossterm", "Clap", "Git2"],
     status: "live",
     year: 2026,
     repoUrl: "https://github.com/Rohit-48/HUBEEE",
     featured: true,
-    image: "/images/projects/hubeee.svg",
+    image: "/images/projects/",
     content: `## What It Is
 
 DevHub is a terminal-first workspace manager for developers. It scans a real project root like \`~/Dev\`, detects project types, persists metadata, and surfaces git and task context through a keyboard-driven TUI.
@@ -52,7 +53,8 @@ DevHub is a terminal-first workspace manager for developers. It scans a real pro
   {
     slug: "my-crate",
     title: "MY-CRATE",
-    description: "A lightweight, self-hosted publishing system for Obsidian users. Transforms markdown notes into a fast, customizable website — no subscription lock-in.",
+    description:
+      "A lightweight, self-hosted publishing system for Obsidian users. Transforms markdown notes into a fast, customizable website — no subscription lock-in.",
     tags: ["RUST", "ASTRO", "HONO.JS", "TYPESCRIPT", "TAILWIND", "SQLITE"],
     tech: ["Rust", "Astro", "Hono.js", "TypeScript", "Tailwind CSS", "SQLite"],
     status: "live",
@@ -60,7 +62,7 @@ DevHub is a terminal-first workspace manager for developers. It scans a real pro
     repoUrl: "https://github.com/Rohit-48/My-Crate",
     liveUrl: "https://logs.rohitxyz.me",
     featured: true,
-    image: "/images/projects/my-crate.png",
+    image: "/images/projects/crate.png",
     content: `## What It Is
 
 My-Crate is a lightweight, self-hosted publishing system built for Obsidian users who want full control over their knowledge. It transforms markdown notes into a fast, customizable, and developer-friendly website, without subscription lock-in.
@@ -86,14 +88,22 @@ My-Crate is a lightweight, self-hosted publishing system built for Obsidian user
   {
     slug: "nocturn",
     title: "NOCTURN",
-    description: "Luxury sneaker e-commerce platform with 3D product viewer, auth, real-time inventory, and Stripe checkout.",
+    description:
+      "Luxury sneaker e-commerce platform with 3D product viewer, auth, real-time inventory, and Stripe checkout.",
     tags: ["NEXT.JS", "TYPESCRIPT", "POSTGRESQL", "STRIPE", "TAILWIND"],
-    tech: ["Next.js", "TypeScript", "PostgreSQL", "Stripe", "Tailwind CSS", "Hono.js", "Drizzle ORM"],
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Stripe",
+      "Tailwind CSS",
+      "Hono.js",
+      "Drizzle ORM",
+    ],
     status: "wip",
     year: 2026,
     repoUrl: "",
     featured: true,
-    image: "/images/projects/nocturn.png",
     content: `## What It Is
 
 NOCTURN is a full-stack luxury sneaker e-commerce platform. Dark aesthetic, high-end product presentation, and a complete purchase flow.
@@ -118,7 +128,8 @@ NOCTURN is a full-stack luxury sneaker e-commerce platform. Dark aesthetic, high
   {
     slug: "neurolink",
     title: "NEUROLINK",
-    description: "Peer-to-peer file sharing across devices on the same local network. Dual runtime: Express (Node.js) and Rust (Axum).",
+    description:
+      "Peer-to-peer file sharing across devices on the same local network. Dual runtime: Express (Node.js) and Rust (Axum).",
     tags: ["RUST", "AXUM", "EXPRESS", "NODE.JS", "TYPESCRIPT"],
     tech: ["Rust", "Axum", "Express", "Node.js", "TypeScript"],
     status: "live",
@@ -139,7 +150,8 @@ NeuroLink v2.0 — two runtimes, one repo. Local network file sharing with batch
   {
     slug: "cyberpunk-components-library",
     title: "CYBERCOMPO",
-    description: "A library of cyberpunk-themed UI components built with Next.js and TypeScript.",
+    description:
+      "A library of cyberpunk-themed UI components built with Next.js and TypeScript.",
     tags: ["NEXT.JS", "TYPESCRIPT", "REACT", "TAILWIND"],
     tech: ["Next.js", "TypeScript", "React", "Tailwind CSS"],
     status: "wip",
@@ -159,7 +171,8 @@ Next.js + TypeScript + Tailwind CSS.`,
   {
     slug: "t-browsee",
     title: "T-BROWSEE",
-    description: "Search the web from your terminal without breaking your flow. Rust-powered CLI with async HTTP.",
+    description:
+      "Search the web from your terminal without breaking your flow. Rust-powered CLI with async HTTP.",
     tags: ["RUST", "ACTIX-WEB", "TOKIO", "CLI"],
     tech: ["Rust", "Clap", "Tokio", "Actix-web"],
     status: "wip",
@@ -182,7 +195,8 @@ Rust + Clap + Tokio + Actix-web.`,
   {
     slug: "cyberdeck",
     title: "CYBERDECK",
-    description: "A project and task management web app with a full cyberpunk design system.",
+    description:
+      "A project and task management web app with a full cyberpunk design system.",
     tags: ["NEXT.JS", "TYPESCRIPT", "REACT", "SHADCN"],
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn UI"],
     status: "live",
@@ -202,7 +216,8 @@ Next.js + TypeScript + Tailwind CSS + Shadcn UI. Deployed on Netlify.`,
   {
     slug: "task-rs",
     title: "TASK.RS",
-    description: "A blazingly fast task manager — Rust backend, React frontend.",
+    description:
+      "A blazingly fast task manager — Rust backend, React frontend.",
     tags: ["RUST", "REACT", "ACTIX-WEB", "TYPESCRIPT"],
     tech: ["Rust", "Actix-web", "React", "TypeScript"],
     status: "live",
@@ -219,7 +234,8 @@ Next.js + TypeScript + Tailwind CSS + Shadcn UI. Deployed on Netlify.`,
   {
     slug: "yappington",
     title: "YAPPINGTON",
-    description: "Minimalist monochrome blog template for developers. Clone, write MDX, deploy.",
+    description:
+      "Minimalist monochrome blog template for developers. Clone, write MDX, deploy.",
     tags: ["NEXT.JS", "TYPESCRIPT", "MDX"],
     tech: ["Next.js", "TypeScript", "MDX", "CSS"],
     status: "live",
@@ -238,14 +254,14 @@ Next.js + TypeScript + MDX + CSS.`,
   {
     slug: "yapitte",
     title: "YAPITTE",
-    description: "A social media platform built with Django and Python. Auth, profiles, feeds, and posts.",
+    description:
+      "A social media platform built with Django and Python. Auth, profiles, feeds, and posts.",
     tags: ["DJANGO", "PYTHON", "SQL", "TAILWIND"],
     tech: ["Django", "Python", "SQL", "Tailwind CSS"],
     status: "live",
     year: 2025,
     repoUrl: "https://github.com/Rohit-48/Django-Project",
     featured: false,
-    image: "/images/projects/yapitte.png",
     content: `## Overview
 
 Yapitte is a social media platform built from scratch with Django.

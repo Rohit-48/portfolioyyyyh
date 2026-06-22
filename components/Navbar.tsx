@@ -185,14 +185,13 @@ export function Navbar() {
               className="text-[11px] text-muted-foreground transition-colors hover:text-foreground"
               target="_blank"
               rel="noreferrer"
-            >
-            </Link>
+            ></Link>
           ))}
         </div>
         <Separator className="opacity-100 h-4" />
-          {/*SPOTIFY*/}
+        {/*SPOTIFY*/}
         <div className="flex items-center justify-center">
-          <SpotifyCard /> 
+          <SpotifyCard />
         </div>
         <AnimatedThemeToggler
           variant="circle"
