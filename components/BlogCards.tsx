@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, type Variants } from "motion/react";
 import { ArrowUpRight, CalendarDays, Clock3 } from "lucide-react";
 
-import type { BlogPost } from "@/data/blogs";
+import type { BlogPost } from "@/types/blog";
 
 type BlogCardsProps = {
   posts: BlogPost[];

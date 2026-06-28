@@ -174,31 +174,33 @@ export function Navbar() {
 
       <div className="flex-1" />
 
-      <Separator className="mb-4 opacity-100 h-1" />
+      {/* SPOTIFY */}
+      <div className="px-1">
+        <SpotifyCard />
+      </div>
 
-      <div className="flex items-center justify-between gap-2 px-1">
-        <div className="flex min-w-0 flex-wrap gap-2">
+      <Separator className="my-3" />
+
+      <div className="flex items-center justify-between px-1">
+        <div className="flex flex-wrap gap-2">
           {siteConfig.socials.map((social) => (
             <Link
               key={social.href}
               href={social.href}
-              className="text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+              className="text-xs text-muted-foreground transition-colors hover:text-foreground"
               target="_blank"
               rel="noreferrer"
-            ></Link>
+            >
+              {social.label}
+            </Link>
           ))}
-        </div>
-        <Separator className="opacity-100 h-4" />
-        {/*SPOTIFY*/}
-        <div className="flex items-center justify-center">
-          <SpotifyCard />
         </div>
         <AnimatedThemeToggler
           variant="circle"
           duration={500}
           theme={resolvedTheme}
           onThemeChange={setTheme}
-          className="flex size-7 hover:cursor-pointer hover:scale-105 transition-all duration-300 items-center justify-center rounded-md text-muted-foreground  hover:text-foreground"
+          className="flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:cursor-pointer hover:text-foreground"
         />
       </div>
     </div>
