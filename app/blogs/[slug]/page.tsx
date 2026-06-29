@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Calendar, BookOpen } from "lucide-react";
 import fs from "fs";
 import path from "path";
 
 import { MarkdownContent } from "@/components/MarkdownContent";
+import { MotionLink } from "@/components/MotionLink";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { getBlogPost, getBlogPosts } from "@/data/blogs";
 import { siteConfig } from "@/lib/site";
@@ -48,8 +48,10 @@ export default async function BlogPostPage({
     <div className="mx-auto w-full max-w-[68ch]">
       <ReadingProgress />
 
-      <Link
+      <MotionLink
         href="/blogs"
+        hoverScale={1.01}
+        hoverY={-1}
         className="group inline-flex items-center gap-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft
@@ -57,7 +59,7 @@ export default async function BlogPostPage({
           className="transition-transform group-hover:-translate-x-0.5"
         />
         Back to blogs
-      </Link>
+      </MotionLink>
 
       <header className="mt-10 border-b border-border pb-9">
         <span
@@ -108,8 +110,10 @@ export default async function BlogPostPage({
       </div>
 
       <footer className="mt-14 border-t border-border pt-7">
-        <Link
+        <MotionLink
           href="/blogs"
+          hoverScale={1.01}
+          hoverY={-1}
           className="group inline-flex items-center gap-2 text-sm font-medium text-foreground"
         >
           <ArrowLeft
@@ -117,7 +121,7 @@ export default async function BlogPostPage({
             className="transition-transform group-hover:-translate-x-0.5"
           />
           Read more articles
-        </Link>
+        </MotionLink>
       </footer>
     </div>
   );

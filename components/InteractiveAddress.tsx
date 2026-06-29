@@ -258,13 +258,16 @@ export function InteractiveAddress({ email }: { email: string }) {
         ))}
       </div>
 
-      <a
+      <motion.a
         href={`mailto:${email}`}
         className="inline-flex items-center gap-2 text-sm font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
+        whileHover={{ scale: 1.02, y: -2 }}
+        whileTap={{ scale: 0.97 }}
+        transition={{ type: "spring", stiffness: 420, damping: 28 }}
       >
         <AtSign size={15} />
         Send an email
-      </a>
+      </motion.a>
     </div>
   );
 }

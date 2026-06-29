@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { type ElementType, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { motion } from "motion/react";
 import Stack from "./fancy/Stack";
 import {
   BookOpen,
@@ -19,7 +20,6 @@ import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 import { Separator } from "./ui/separator";
 import { useTheme } from "./ThemeProvider";
 import { profileImages, siteConfig } from "@/lib/site";
-import { SpotifyCard } from "./SpotifyCard";
 
 const NAV_LINKS = [
   { href: "#hero", label: "Home", icon: Home },
@@ -33,6 +33,8 @@ const NAV_LINKS = [
 const HASH_IDS = NAV_LINKS.filter((l) => l.href.startsWith("#")).map((l) =>
   l.href.slice(1)
 );
+
+const MotionNextLink = motion.create(Link) as ElementType;
 
 function ProfileStack() {
   const cards = useMemo(
@@ -131,11 +133,14 @@ export function Navbar() {
 
           if (isRoute) {
             return (
-              <Link
+              <MotionNextLink
                 key={href}
                 href={href}
                 onClick={() => setMobileOpen(false)}
                 className={classes}
+                whileHover={{ x: 3 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 420, damping: 30 }}
               >
                 <Icon
                   size={16}
@@ -145,15 +150,18 @@ export function Navbar() {
                 {isActive && (
                   <span className="ml-auto size-1.5 rounded-full bg-foreground/50" />
                 )}
-              </Link>
+              </MotionNextLink>
             );
           }
 
           return (
-            <button
+            <motion.button
               key={href}
               onClick={() => scrollTo(href)}
               className={classes}
+              whileHover={{ x: 3 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 420, damping: 30 }}
             >
               <Icon
                 size={16}
@@ -167,34 +175,14 @@ export function Navbar() {
               {isActive && (
                 <span className="ml-auto size-1.5 rounded-full bg-foreground/50" />
               )}
-            </button>
+            </motion.button>
           );
         })}
       </nav>
 
       <div className="flex-1" />
 
-      {/* SPOTIFY */}
-      <div className="px-1">
-        <SpotifyCard />
-      </div>
-
-      <Separator className="my-3" />
-
-      <div className="flex items-center justify-between px-1">
-        <div className="flex flex-wrap gap-2">
-          {siteConfig.socials.map((social) => (
-            <Link
-              key={social.href}
-              href={social.href}
-              className="text-xs text-muted-foreground transition-colors hover:text-foreground"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {social.label}
-            </Link>
-          ))}
-        </div>
+      <div className="flex items-center justify-end px-1">
         <AnimatedThemeToggler
           variant="circle"
           duration={500}
@@ -208,13 +196,16 @@ export function Navbar() {
 
   return (
     <>
-      <button
+      <motion.button
         onClick={() => setMobileOpen(!mobileOpen)}
         className="fixed left-4 top-4 z-50 flex size-9 items-center justify-center rounded-lg border border-border/60 bg-background text-foreground shadow-sm md:hidden"
         aria-label="Toggle navigation"
+        whileHover={{ scale: 1.05, y: -1 }}
+        whileTap={{ scale: 0.94 }}
+        transition={{ type: "spring", stiffness: 420, damping: 28 }}
       >
         {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-      </button>
+      </motion.button>
 
       {mobileOpen && (
         <div

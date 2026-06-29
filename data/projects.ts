@@ -1,44 +1,60 @@
 // data/projects.ts
-import type { Project } from "@/types/project"; 
 
-export const projects = [
+export type Project = {
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  tech: string[];
+  tags: string[];
+  image?: string;
+  liveUrl?: string;
+  repoUrl?: string;
+  featured: boolean;
+  status: "live" | "wip" | "archived";
+  year: number;
+};
+
+export const projects: Project[] = [
   {
     slug: "hubeee",
     title: "DEVHUB",
-    description: "A terminal-based workspace manager that scans your project root, tracks git state, scores project health, and gives you a keyboard-driven dashboard.",
+    description:
+      "A terminal-based workspace manager that scans your project root, tracks git state, scores project health, and gives you a keyboard-driven dashboard for active work.",
     tags: ["RUST", "RATATUI", "CLI", "GIT2", "SERDE"],
     tech: ["Rust", "Ratatui", "Crossterm", "Clap", "Git2"],
     status: "live",
     year: 2026,
     repoUrl: "https://github.com/Rohit-48/HUBEEE",
     featured: true,
-    image: "/images/projects/hubeee.png",
+    image: "/images/projects/",
     content: `## What It Is
 
 DevHub is a terminal-first workspace manager for developers. It scans a real project root like \`~/Dev\`, detects project types, persists metadata, and surfaces git and task context through a keyboard-driven TUI.
 
 ## Core Features
 
-- **Workspace Scanning** — Rust, Node.js, React, Next.js, Python, Go, C/C++, Git
-- **TUI Dashboard** — status badges, git branch, changed-file counts, tasks, recent files
-- **Live Search** — filter by name, type, tags, status, starred, stale, archived
-- **Git Integration** — inspect status, pull, add, commit from inside the dashboard
-- **Health Scoring** — compute and inspect project health factors
-- **Idea Vault + Sessions** — capture ideas, convert to projects, save/restore sessions
+- **Workspace Scanning** - detect direct-child projects across Rust, Node.js, React, Next.js, Python, Go, C/C++, Git, and unknown folders
+- **TUI Dashboard** - browse projects with status badges, git branch details, changed-file counts, tasks, and recent files
+- **Live Search** - filter by project name, type, tags, status, starred, stale, and archived states
+- **Git Integration** - inspect status, pull, add all changes, and create commits from inside the dashboard
+- **Health Scoring** - compute project health and inspect the factors behind the score
+- **Idea Vault + Sessions** - capture ideas, convert them into projects, and save or restore workspace sessions
 
 ## Stack
 
-- **Rust** — core runtime
-- **Ratatui** — TUI rendering
-- **Crossterm** — terminal events
-- **Clap** — CLI argument parsing
-- **Git2** — repository inspection
-- **Serde** — metadata persistence`,
+- **Rust** - core application and CLI runtime
+- **Ratatui** - terminal user interface rendering
+- **Crossterm** - terminal events and screen management
+- **Clap** - command parsing for CLI flows
+- **Git2** - repository inspection and git actions
+- **Serde / Serde JSON** - persisted metadata, sessions, and config`,
   },
   {
     slug: "my-crate",
     title: "MY-CRATE",
-    description: "A lightweight, self-hosted publishing system for Obsidian users. Transforms markdown notes into a fast, customizable website — no subscription lock-in.",
+    description:
+      "A lightweight, self-hosted publishing system for Obsidian users. Transforms markdown notes into a fast, customizable website — no subscription lock-in.",
     tags: ["RUST", "ASTRO", "HONO.JS", "TYPESCRIPT", "TAILWIND", "SQLITE"],
     tech: ["Rust", "Astro", "Hono.js", "TypeScript", "Tailwind CSS", "SQLite"],
     status: "live",
@@ -49,61 +65,71 @@ DevHub is a terminal-first workspace manager for developers. It scans a real pro
     image: "/images/projects/crate.png",
     content: `## What It Is
 
-My-Crate is a self-hosted publishing system for Obsidian users. Your notes, your server, your rules.
+My-Crate is a lightweight, self-hosted publishing system built for Obsidian users who want full control over their knowledge. It transforms markdown notes into a fast, customizable, and developer-friendly website, without subscription lock-in.
 
 ## Features
 
-- **Self-hosted** — full control, no Notion or Obsidian Publish lock-in
-- **Fast** — Astro static generation, near-instant loads
-- **Rust indexer** — fast markdown parsing and indexing
-- **Hono.js API** — lightweight server layer
-- **SQLite** — persistent storage without the overhead
+- **Customizable** - fully customizable theme and layout
+- **Fast** - built with Astro for fast page loads
+- **Self-hosted** - your notes, your server, your rules
+- **SQLite** - lightweight database storage
+- **Hono.js** - lightweight server-side API
+- **Rust indexer** - fast markdown parsing and indexing
 
 ## Stack
 
-- **Rust** — backend indexer and webhook handler
-- **Astro** — static site generation
-- **Hono.js** — API server
-- **TypeScript** — type safety
-- **Tailwind CSS** — styling
-- **SQLite** — storage`,
+- **Rust** - backend indexer and webhook handler
+- **Astro** - static site generation
+- **Hono.js** - API server
+- **TypeScript** - type safety throughout
+- **Tailwind CSS** - styling
+- **SQLite** - persistent storage`,
   },
   {
     slug: "nocturn",
     title: "NOCTURN",
-    description: "Luxury sneaker e-commerce platform with 3D product viewer, auth, real-time inventory, and Stripe checkout.",
+    description:
+      "Luxury sneaker e-commerce platform with 3D product viewer, auth, real-time inventory, and Stripe checkout.",
     tags: ["NEXT.JS", "TYPESCRIPT", "POSTGRESQL", "STRIPE", "TAILWIND"],
-    tech: ["Next.js", "TypeScript", "PostgreSQL", "Stripe", "Tailwind CSS", "Hono.js", "Drizzle ORM"],
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Stripe",
+      "Tailwind CSS",
+      "Hono.js",
+      "Drizzle ORM",
+    ],
     status: "wip",
     year: 2026,
-    repoUrl: "https://github.com/Rohit-48/Nocturn",
-    image: "/images/projects/nocturn.png",
+    repoUrl: "",
     featured: true,
     content: `## What It Is
 
-NOCTURN is a full-stack luxury sneaker e-commerce platform. Dark aesthetic, high-end product presentation, complete purchase flow.
+NOCTURN is a full-stack luxury sneaker e-commerce platform. Dark aesthetic, high-end product presentation, and a complete purchase flow.
 
 ## Features
 
-- **3D Product Viewer** — React Three Fiber
-- **Auth** — better-auth with session management
-- **Stripe Checkout** — full payment integration
-- **Real-time Inventory** — PostgreSQL backed stock tracking
-- **Admin Dashboard** — order and inventory management
+- **3D Product Viewer** - React Three Fiber powered model viewer
+- **Auth** - better-auth with session management
+- **Stripe Checkout** - full payment integration
+- **Real-time Inventory** - PostgreSQL backed stock tracking
+- **Admin Dashboard** - order and inventory management
 
 ## Stack
 
-- **Next.js 15** — App Router, RSC
-- **Hono.js** — API layer
-- **Drizzle ORM** — type-safe queries
-- **PostgreSQL** — primary database
-- **Stripe** — payments
-- **Tailwind CSS** — styling`,
+- **Next.js 15** - App Router, RSC
+- **Hono.js** - API layer
+- **Drizzle ORM** - type-safe database queries
+- **PostgreSQL** - primary database
+- **Stripe** - payment processing
+- **Tailwind CSS** - styling`,
   },
   {
     slug: "neurolink",
     title: "NEUROLINK",
-    description: "Peer-to-peer file sharing across devices on the same local network. Dual runtime: Express (Node.js) and Rust (Axum).",
+    description:
+      "Peer-to-peer file sharing across devices on the same local network. Dual runtime: Express (Node.js) and Rust (Axum).",
     tags: ["RUST", "AXUM", "EXPRESS", "NODE.JS", "TYPESCRIPT"],
     tech: ["Rust", "Axum", "Express", "Node.js", "TypeScript"],
     status: "live",
@@ -117,14 +143,15 @@ NeuroLink v2.0 — two runtimes, one repo. Local network file sharing with batch
 
 ## Stack
 
-- **Rust + Axum** — high-performance async runtime
-- **Express + Node.js** — JS runtime alternative
-- **TypeScript** — type safety on the Node side`,
+- **Rust + Axum** - high-performance async runtime
+- **Express + Node.js** - JS runtime alternative
+- **TypeScript** - type safety on the Node side`,
   },
   {
     slug: "cyberpunk-components-library",
     title: "CYBERCOMPO",
-    description: "A library of cyberpunk-themed UI components built with Next.js and TypeScript.",
+    description:
+      "A library of cyberpunk-themed UI components built with Next.js and TypeScript.",
     tags: ["NEXT.JS", "TYPESCRIPT", "REACT", "TAILWIND"],
     tech: ["Next.js", "TypeScript", "React", "Tailwind CSS"],
     status: "wip",
@@ -135,7 +162,7 @@ NeuroLink v2.0 — two runtimes, one repo. Local network file sharing with batch
     image: "/images/projects/cyberCompo.png",
     content: `## What It Is
 
-Cyberpunk-themed UI components. Neon aesthetic, accessible, drops into any React project.
+A collection of cyberpunk-themed UI components. Neon aesthetic, fully accessible, drops into any React project.
 
 ## Stack
 
@@ -144,7 +171,8 @@ Next.js + TypeScript + Tailwind CSS.`,
   {
     slug: "t-browsee",
     title: "T-BROWSEE",
-    description: "Search the web from your terminal without breaking your flow. Rust-powered CLI with async HTTP.",
+    description:
+      "Search the web from your terminal without breaking your flow. Rust-powered CLI with async HTTP.",
     tags: ["RUST", "ACTIX-WEB", "TOKIO", "CLI"],
     tech: ["Rust", "Clap", "Tokio", "Actix-web"],
     status: "wip",
@@ -154,11 +182,11 @@ Next.js + TypeScript + Tailwind CSS.`,
     image: "/images/projects/t-browsee.png",
     content: `## The Problem
 
-Context switching between terminal and browser kills flow.
+Context switching between terminal and browser kills developer flow.
 
 ## The Solution
 
-Search directly from your terminal. Stay in flow.
+T-Browsee lets you search directly from your terminal. Run a command, get answers, stay in flow.
 
 ## Stack
 
@@ -167,7 +195,8 @@ Rust + Clap + Tokio + Actix-web.`,
   {
     slug: "cyberdeck",
     title: "CYBERDECK",
-    description: "Project and task management with a full cyberpunk design system.",
+    description:
+      "A project and task management web app with a full cyberpunk design system.",
     tags: ["NEXT.JS", "TYPESCRIPT", "REACT", "SHADCN"],
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn UI"],
     status: "live",
@@ -178,7 +207,7 @@ Rust + Clap + Tokio + Actix-web.`,
     image: "/images/projects/Cyberdeck.png",
     content: `## Overview
 
-Task management app with a Cyberpunk visual identity.
+CYBERDECK is a task management app with a Cyberpunk visual identity. Create tasks, organize by project, track progress.
 
 ## Stack
 
@@ -187,7 +216,8 @@ Next.js + TypeScript + Tailwind CSS + Shadcn UI. Deployed on Netlify.`,
   {
     slug: "task-rs",
     title: "TASK.RS",
-    description: "Blazingly fast task manager — Rust backend, React frontend.",
+    description:
+      "A blazingly fast task manager — Rust backend, React frontend.",
     tags: ["RUST", "REACT", "ACTIX-WEB", "TYPESCRIPT"],
     tech: ["Rust", "Actix-web", "React", "TypeScript"],
     status: "live",
@@ -197,14 +227,15 @@ Next.js + TypeScript + Tailwind CSS + Shadcn UI. Deployed on Netlify.`,
     image: "/images/projects/tm.png",
     content: `## Stack
 
-- **Actix-web** — async HTTP server
-- **TypeScript React** — type-safe frontend
-- **Optimistic updates** — UI responds immediately, syncs async`,
+- **Actix-web** - async HTTP server in Rust
+- **TypeScript React** - full type safety frontend
+- **Optimistic updates** - UI responds immediately, syncs async`,
   },
   {
     slug: "yappington",
     title: "YAPPINGTON",
-    description: "Minimalist monochrome blog template. Clone, write MDX, deploy.",
+    description:
+      "Minimalist monochrome blog template for developers. Clone, write MDX, deploy.",
     tags: ["NEXT.JS", "TYPESCRIPT", "MDX"],
     tech: ["Next.js", "TypeScript", "MDX", "CSS"],
     status: "live",
@@ -214,7 +245,7 @@ Next.js + TypeScript + Tailwind CSS + Shadcn UI. Deployed on Netlify.`,
     image: "/images/projects/p1.png",
     content: `## What It Is
 
-Blog template for developers who want to write without fighting tools.
+A blog template for developers who want to write without fighting tools.
 
 ## Stack
 
@@ -223,31 +254,33 @@ Next.js + TypeScript + MDX + CSS.`,
   {
     slug: "yapitte",
     title: "YAPITTE",
-    description: "Social media platform built with Django. Auth, profiles, feeds, posts.",
+    description:
+      "A social media platform built with Django and Python. Auth, profiles, feeds, and posts.",
     tags: ["DJANGO", "PYTHON", "SQL", "TAILWIND"],
     tech: ["Django", "Python", "SQL", "Tailwind CSS"],
     status: "live",
     year: 2025,
     repoUrl: "https://github.com/Rohit-48/Django-Project",
     featured: false,
-    image: "/images/projects/yapitte.png",
     content: `## Overview
 
-Social media platform built from scratch with Django — auth, profiles, follow system, feed.`,
+Yapitte is a social media platform built from scratch with Django.
+
+## Features
+
+- User auth, profiles, follow system
+- Post creation and chronological feed`,
   },
-] satisfies Project[];
+];
 
-// helpers
-export const getAllProjects = (): Project[] => projects;
+export function getAllProjects(): Project[] {
+  return projects;
+}
 
-export const getFeaturedProjects = (): Project[] =>
-  projects.filter((p) => p.featured);
+export function getFeaturedProjects(): Project[] {
+  return projects.filter((p) => p.featured);
+}
 
-export const getProject = (slug: string): Project | undefined =>
-  projects.find((p) => p.slug === slug);
-
-export const getProjectsByStatus = (status: Project["status"]): Project[] =>
-  projects.filter((p) => p.status === status);
-
-export const getProjectsByYear = (year: number): Project[] =>
-  projects.filter((p) => p.year === year);
+export function getProject(slug: string): Project | undefined {
+  return projects.find((p) => p.slug === slug);
+}

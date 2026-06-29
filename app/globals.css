@@ -280,3 +280,13 @@
     @apply mr-2 align-middle;
   }
 }
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}

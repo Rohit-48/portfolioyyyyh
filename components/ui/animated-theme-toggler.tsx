@@ -256,7 +256,10 @@ export const AnimatedThemeToggler = ({
       type="button"
       ref={buttonRef}
       onClick={toggleTheme}
-      className={cn(className)}
+      className={cn(
+        "transition-transform hover:-translate-y-0.5 hover:scale-105 active:scale-95",
+        className
+      )}
       {...props}
     >
       {isDark ? <Sun /> : <Moon />}

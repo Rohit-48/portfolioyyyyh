@@ -45,6 +45,7 @@ export function BlogCards({ posts }: BlogCardsProps) {
           key={post.slug}
           variants={card}
           whileHover={{ y: -5 }}
+          whileTap={{ scale: 0.99 }}
           className="group relative overflow-hidden rounded-xl border border-border/70 bg-card/80 shadow-sm transition-colors hover:border-foreground/20"
           style={{ ["--blog-accent" as string]: post.accent }}
         >

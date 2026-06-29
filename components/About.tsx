@@ -52,7 +52,7 @@ export function AboutSection() {
                          hover:border-foreground/30 hover:bg-muted/60
                          hover:text-foreground cursor-default
                          hover:cursor-pointer
-                         hover:scale-105 transition-all duration-500
+                         hover:-translate-y-0.5 hover:scale-105 active:scale-95 transition-all duration-500
                          "
             >
               <skill.icon size={13} aria-hidden={true as const} />

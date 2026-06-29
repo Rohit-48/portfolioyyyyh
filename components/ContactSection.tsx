@@ -15,7 +15,7 @@ import {
 } from "react-icons/si";
 
 import { InteractiveAddress } from "@/components/InteractiveAddress";
-import { label } from "motion/react-client";
+import { MotionAnchor } from "@/components/MotionLink";
 
 const email = "rohit@rohitxyz.me";
 const contactLinks = [
@@ -145,11 +145,13 @@ export function ContactSection() {
           const external = !social.href.startsWith("mailto:");
           const Icon = social.icon;
           return (
-            <a
+            <MotionAnchor
               key={social.label}
               href={social.href}
               target={external ? "_blank" : undefined}
               rel={external ? "noreferrer me" : undefined}
+              hoverScale={1.015}
+              hoverY={-3}
               className={`group flex min-w-0 items-start gap-3 border-border py-4 transition-colors hover:bg-muted/25 sm:px-4 ${index < contactLinks.length - 2 ? "border-b" : ""} ${index % 2 === 0 ? "sm:border-r sm:pl-0" : "sm:pr-0"}`}
             >
               <span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground  group-hover:border-foreground/20 group-hover:text-foreground group-hover:scale-110 transition-all duration-500 hover:cursor-pointer">
@@ -172,7 +174,7 @@ export function ContactSection() {
                   {social.note}
                 </span>
               </span>
-            </a>
+            </MotionAnchor>
           );
         })}
       </div>
