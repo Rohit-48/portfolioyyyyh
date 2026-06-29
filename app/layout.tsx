@@ -11,6 +11,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { siteConfig } from "@/lib/site";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -131,6 +132,7 @@ export default function RootLayout({
             <main className="relative z-10 px-5 py-16 sm:px-8 md:ml-52 md:pl-12">
               {children}
             </main>
+            <Analytics />
           </div>
         </ThemeProvider>
       </body>
