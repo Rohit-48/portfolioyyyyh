@@ -13,7 +13,6 @@ export default function Home() {
       <section id="hero">
         <HeroCard />
       </section>
-      <Separator />
       <AboutSection />
       <Separator />
       <ProjectsPreview />

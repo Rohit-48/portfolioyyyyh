@@ -4,7 +4,7 @@ export const siteConfig = {
   title: "Rohit | Web Engineer",
   description:
     "Web Engineer crafting digital art for the web. TypeScript and React are my go-to tools, backed by rigorous engineering.",
-  url: "https://rohitvince.in",
+  url: "https://rohitxyz.me",
   profileImage: "/images/profile/profile-image.png",
   ogImage: "/images/profile/card.png",
   xHandle: "@rohitcpp",

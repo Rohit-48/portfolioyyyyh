@@ -120,7 +120,7 @@ export function HeroCard() {
         </div>
       </div>
 
-      <div className="mt-7 grid gap-2 border-t border-border/70 pt-5 text-xs text-muted-foreground sm:grid-cols-3">
+      <div className="mt-7 grid gap-2 text-xs text-muted-foreground sm:grid-cols-3">
         <div className="flex items-center justify-center gap-1.5 md:justify-start">
           <span className="font-medium text-foreground">10+</span>
           shipped projects
