@@ -14,7 +14,7 @@ import {
   SiX,
 } from "react-icons/si";
 
-import { InteractiveAddress } from "@/components/InteractiveAddress";
+
 import { MotionAnchor } from "@/components/MotionLink";
 
 const email = "rohit@rohitxyz.me";
@@ -121,16 +121,7 @@ export function ContactSection() {
         </p>
       </div>
 
-      <div className="relative mt-9 overflow-hidden rounded-2xl border border-border bg-card px-3 py-8 sm:px-7 sm:py-10">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent" />
-        <p className="text-center text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-          Primary channel
-        </p>
-        <InteractiveAddress email={email} />
-        <p className="text-center text-[11px] text-muted-foreground/70">
-          Hover, focus, or tap to inspect the address.
-        </p>
-      </div>
+
 
       <div className="mt-10 flex items-center justify-between gap-4 border-b border-border pb-3">
         <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">

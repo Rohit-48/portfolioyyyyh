@@ -1,7 +1,7 @@
 import { ArrowUpRight, CalendarDays, Clock3, Code2, ExternalLink } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 
-import { InteractiveAddress } from "@/components/InteractiveAddress";
+
 import { MotionLink } from "@/components/MotionLink";
 import { getBlogPosts } from "@/data/blogs";
 import { projects } from "@/data/projects";
@@ -284,9 +284,7 @@ export function ContactSection() {
         me a note.
       </p>
 
-      <div className="mt-8 rounded-2xl border border-border bg-card px-3 py-8 sm:px-7 sm:py-10">
-        <InteractiveAddress email="rohit@rohitxyz.me" />
-      </div>
+
     </section>
   );
 }
