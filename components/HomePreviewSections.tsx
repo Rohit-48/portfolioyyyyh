@@ -1,36 +1,8 @@
-import { ArrowUpRight, CalendarDays, Clock3, Code2, ExternalLink } from "lucide-react";
-import { SiGithub } from "react-icons/si";
-
-
+import { ArrowUpRight, CalendarDays, Clock3 } from "lucide-react";
 import { MotionLink } from "@/components/MotionLink";
+import { ProjectCard } from "@/components/ProjectCard";
 import { getBlogPosts } from "@/data/blogs";
 import { projects } from "@/data/projects";
-
-const statusConfig = {
-  live: {
-    cls: "bg-green-500/10 text-green-700 dark:text-green-400 border border-green-500/20",
-    dot: "bg-green-500",
-  },
-  wip: {
-    cls: "bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20",
-    dot: "bg-amber-500",
-  },
-  archived: {
-    cls: "bg-muted text-muted-foreground border border-border",
-    dot: "bg-muted-foreground/50",
-  },
-} as const;
-
-function getInitials(title: string) {
-  return title
-    .replace(/[^a-zA-Z\s]/g, " ")
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((w) => w[0]!.toUpperCase())
-    .join("");
-}
 
 export function ProjectsPreview() {
   const featuredProjects = projects
@@ -66,89 +38,10 @@ export function ProjectsPreview() {
         </MotionLink>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {featuredProjects.map((project) => {
-          const { cls, dot } = statusConfig[project.status];
-
-          return (
-            <MotionLink
-              key={project.slug}
-              href={`/projects/${project.slug}`}
-              hoverScale={1.025}
-              hoverY={-4}
-              className="group relative flex min-h-[360px] flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:border-[#E8A820]/35 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/20"
-            >
-              {project.image ? (
-                <div className="relative h-36 w-full overflow-hidden border-b border-border bg-muted">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card/60 via-transparent to-transparent" />
-                </div>
-              ) : (
-                <div className="relative flex h-36 w-full items-center justify-center overflow-hidden border-b border-dashed border-muted-foreground/20 bg-gradient-to-br from-muted/80 via-muted/50 to-muted/20">
-                  <span className="pointer-events-none select-none font-fraunces text-6xl font-bold tracking-tighter text-foreground/[0.07]">
-                    {getInitials(project.title)}
-                  </span>
-                  <Code2 size={22} className="absolute text-muted-foreground/20" />
-                </div>
-              )}
-
-              <div className="flex flex-1 flex-col p-5">
-                <div className="mb-4 flex items-center gap-2">
-                  <span
-                    className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.16em] ${cls}`}
-                  >
-                    <span className={`size-1.5 rounded-full ${dot}`} />
-                    {project.status}
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] text-muted-foreground">
-                    <CalendarDays size={11} />
-                    {project.year}
-                  </span>
-                </div>
-
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="relative w-fit font-space-grotesk text-base font-semibold text-foreground transition-colors duration-200 group-hover:text-[#E8A820]">
-                    {project.title}
-                    <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-[#E8A820] transition-all duration-300 group-hover:w-full" />
-                  </h3>
-                  <ArrowUpRight
-                    size={14}
-                    className="mt-0.5 shrink-0 text-muted-foreground/40 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground"
-                  />
-                </div>
-
-                <p className="mt-3 flex-1 text-xs leading-relaxed text-muted-foreground">
-                  {project.description}
-                </p>
-
-                <div className="mt-5 flex flex-wrap gap-1.5">
-                  {project.tech.slice(0, 4).map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-md border border-border bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-[11px]">
-                  <div className="flex items-center gap-2 text-muted-foreground/50">
-                    {project.liveUrl && <ExternalLink size={12} aria-label="Live project" />}
-                    {project.repoUrl && <SiGithub size={12} aria-label="Repository" />}
-                  </div>
-                  <span className="text-muted-foreground">
-                    {project.liveUrl ? "Live project" : "Development notes"}
-                  </span>
-                </div>
-              </div>
-            </MotionLink>
-          );
-        })}
+      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
+        {featuredProjects.map((project) => (
+          <ProjectCard key={project.slug} project={project} variant="preview" />
+        ))}
       </div>
     </section>
   );
@@ -283,8 +176,6 @@ export function ContactSection() {
         Have a project, an engineering problem, or an idea worth exploring? Send
         me a note.
       </p>
-
-
     </section>
   );
 }
